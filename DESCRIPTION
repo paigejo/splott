@@ -1,0 +1,11 @@
+Package: splott
+Title: Spatial Plotting Toolbox
+Version: 0.0.0.9000
+Authors@R: 
+    person("John", "Paige", , "jpaige@nr.no", role = c("aut", "cre"))
+Description: Base R functions for simple spatial plotting and nonlinear scale generation, based partly on the fields package.
+License: MIT + file LICENSE
+Imports: stats, graphics, grDevices, fields, colorspace
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
