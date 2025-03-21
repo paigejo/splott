@@ -14,6 +14,7 @@ splot(
   colScale = blueGreenYellowSeqCols,
   center = 0,
   centerScale = FALSE,
+  compressed = FALSE,
   legend.mar = 7,
   new = TRUE,
   scaleFun = function(x) {
@@ -41,9 +42,23 @@ splot(
 
 \item{zlim}{Range of the response}
 
-\item{col}{A vector of colors determining the color scale for plotting}
+\item{col}{A vector of colors determining the color scale for plotting (it is
+recommended to use the \code{colScale} argument instead)}
+
+\item{nlevel}{Number of colors to include in generated color scale if \code{col}
+not specified}
 
 \item{colScale}{A vector of colors determining the color scale for plotting}
+
+\item{center}{Value at which to center the color scale if \code{centerScale} set
+to TRUE}
+
+\item{centerScale}{Whether to center the color scale at \code{center} (e.g. for
+diverging color scales)}
+
+\item{compressed}{Rather than cutting off a color scale to make the center at
+the desired point, compress the scale on the shorter side so it changes color
+faster.}
 
 \item{legend.mar}{(as legend.args) see \code{\link{fields::image.plot}}}
 

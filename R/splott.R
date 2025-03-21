@@ -220,13 +220,13 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
 #' @export
 #' @importFrom fields image.plot
 #' @importFrom fields quilt.plot
-scaledQuiltPlot = function(x, y, z=NULL, zlim=NULL, col=NULL, 
-                           colScale=blueGreenYellowSeqCols, 
-                           nlevel=64, scaleFun=function(x) {x}, 
-                           scaleFunInverse=function(x) {x}, 
-                           center=0, centerScale=FALSE, compressed=FALSE, 
-                           n.ticks=5, min.n=5, ticks=NULL, tickLabels=NULL, 
-                           forceColorsInRange=FALSE, otherAxis.args=NULL, ...) {
+squilt = function(x, y, z=NULL, zlim=NULL, col=NULL, 
+                  colScale=blueGreenYellowSeqCols, 
+                  nlevel=64, scaleFun=function(x) {x}, 
+                  scaleFunInverse=function(x) {x}, 
+                  center=0, centerScale=FALSE, compressed=FALSE, 
+                  n.ticks=5, min.n=5, ticks=NULL, tickLabels=NULL, 
+                  forceColorsInRange=FALSE, otherAxis.args=NULL, ...) {
   
   # clean up input arguments
   if(!is.null(zlim) && any(!is.finite(scaleFun(zlim)))) {
