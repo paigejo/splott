@@ -229,6 +229,15 @@ squilt = function(x, y, z=NULL, zlim=NULL, col=NULL,
                   n.ticks=5, min.n=5, ticks=NULL, tickLabels=NULL, 
                   forceColorsInRange=FALSE, otherAxis.args=NULL, ...) {
   
+  # set default x and y labels based on this function call
+  dotList = list(...)
+  if(!("xlab" %in% names(dotList))) {
+    dotList = c(dotList, list(xlab=deparse(substitute(x))))
+  }
+  if(!("ylab" %in% names(dotList))) {
+    dotList = c(dotList, list(ylab=deparse(substitute(y))))
+  }
+  
   # clean up input arguments
   if(!is.null(zlim) && any(!is.finite(scaleFun(zlim)))) {
     stop("scaleFun(zlim) not finite")
@@ -257,10 +266,6 @@ squilt = function(x, y, z=NULL, zlim=NULL, col=NULL,
     z[z > zlim[2]] = zlim[2]
   }
   
-  if(is.null(zlim)) {
-    zlim = range(scaleFun(z))
-  }
-  
   # set tick marks automatically if not done already
   if(is.null(ticks)) {
     ticks = scaleFun(pretty(z, n.ticks=n.ticks, min.n=min.n))
@@ -285,21 +290,12 @@ squilt = function(x, y, z=NULL, zlim=NULL, col=NULL,
     }
   }
   
-  # set default x and y labels based on this function call
-  dotList = list(...)
-  if(!("xlab" %in% dotList)) {
-    dotList = c(dotList, list(xlab=deparse(substitute(x))))
-  }
-  if(!("ylab" %in% dotList)) {
-    dotList = c(dotList, list(ylab=deparse(substitute(y))))
-  }
-  
   # scale the data and ticks, but plot with unscaled tick labels
   z = scaleFun(z)
   
-  out = do.call(fields::quilt.plot, list(x[,1], x[,2], z, 
-                                         zlim=scaleFun(zlim), col=col, 
-                                         add.legend=FALSE, dotList))
+  out = do.call(fields::quilt.plot, c(list(x[,1], x[,2], z, 
+                                           zlim=scaleFun(zlim), col=col, 
+                                           add.legend=FALSE), dotList))
   
   fields::image.plot(zlim=scaleFun(zlim), nlevel=length(col), legend.only=TRUE, col=col, 
                      axis.args=c(list(at=ticks, labels=tickLabels), 
