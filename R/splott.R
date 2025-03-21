@@ -63,7 +63,7 @@
 splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64, 
                  colScale=blueGreenYellowSeqCols, 
                  center=0, centerScale=FALSE, compressed=FALSE, 
-                 legend.mar=7, new=TRUE, scaleFun = function(x) {x}, 
+                 legend.mar=7, new=TRUE, scaleFun=I, 
                  n.ticks=5, min.n=5, ticks=NULL, tickLabels=NULL, legend.width=1.2, addColorBar=TRUE, 
                  legendArgs=list(), leaveRoomForLegend=TRUE, forceColorsInRange=FALSE, 
                  pch=19, colorName=c("col", "bg"), ...) {
@@ -223,8 +223,7 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
 #' @importFrom fields quilt.plot
 squilt = function(x, y, z=NULL, zlim=NULL, col=NULL, 
                   colScale=blueGreenYellowSeqCols, 
-                  nlevel=64, scaleFun=function(x) {x}, 
-                  scaleFunInverse=function(x) {x}, 
+                  nlevel=64, scaleFun=I, scaleFunInverse=I, 
                   center=0, centerScale=FALSE, compressed=FALSE, 
                   n.ticks=5, min.n=5, ticks=NULL, tickLabels=NULL, 
                   forceColorsInRange=FALSE, otherAxis.args=NULL, ...) {

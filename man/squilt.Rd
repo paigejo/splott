@@ -12,12 +12,8 @@ squilt(
   col = NULL,
   colScale = blueGreenYellowSeqCols,
   nlevel = 64,
-  scaleFun = function(x) {
-     x
- },
-  scaleFunInverse = function(x) {
-     x
- },
+  scaleFun = I,
+  scaleFunInverse = I,
   center = 0,
   centerScale = FALSE,
   compressed = FALSE,

@@ -17,9 +17,7 @@ splot(
   compressed = FALSE,
   legend.mar = 7,
   new = TRUE,
-  scaleFun = function(x) {
-     x
- },
+  scaleFun = I,
   n.ticks = 5,
   min.n = 5,
   ticks = NULL,
