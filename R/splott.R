@@ -38,6 +38,7 @@
 #' range. Useful if you have a value outside of the range or that is NA after 
 #' being transformed via the scale that you still want to plot at the edge of 
 #' the color scale
+#' @param pch see \code{\link{graphics::points}}
 #' @param colorName What plotting parameter controls the color of the points. 
 #' @param ... Arguments to the plot function. For example, if `pch==19`, set to 
 #' 'bg', but if `pch==1`, set to 'col'.
@@ -65,7 +66,7 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
                  legend.mar=7, new=TRUE, scaleFun = function(x) {x}, 
                  n.ticks=5, min.n=5, ticks=NULL, tickLabels=NULL, legend.width=1.2, addColorBar=TRUE, 
                  legendArgs=list(), leaveRoomForLegend=TRUE, forceColorsInRange=FALSE, 
-                 colorName=c("col", "bg"), ...) {
+                 pch=19, colorName=c("col", "bg"), ...) {
   colorName = match.arg(colorName)
   
   # remove NA points
@@ -108,15 +109,15 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
       suppressWarnings({graphics::par(newPar)})
     
     if(colorName == "col") {
-      do.call("plot", c(list(x=x, y=y, col=cols), list(...)))
+      do.call("plot", c(list(x=x, y=y, col=cols, pch=pch), list(...)))
     } else {
-      do.call("plot", c(list(x=x, y=y, bg=cols), list(...)))
+      do.call("plot", c(list(x=x, y=y, bg=cols, pch=pch), list(...)))
     }
   } else {
     if(colorName == "col") {
-      do.call("points", c(list(x=x, y=y, col=cols), list(...)))
+      do.call("points", c(list(x=x, y=y, col=cols, pch=pch), list(...)))
     } else {
-      do.call("points", c(list(x=x, y=y, bg=cols), list(...)))
+      do.call("points", c(list(x=x, y=y, bg=cols, pch=pch), list(...)))
     }
   }
   
@@ -284,12 +285,21 @@ squilt = function(x, y, z=NULL, zlim=NULL, col=NULL,
     }
   }
   
+  # set default x and y labels based on this function call
+  dotList = list(...)
+  if(!("xlab" %in% dotList)) {
+    dotList = c(dotList, list(xlab=deparse(substitute(x))))
+  }
+  if(!("ylab" %in% dotList)) {
+    dotList = c(dotList, list(ylab=deparse(substitute(y))))
+  }
+  
   # scale the data and ticks, but plot with unscaled tick labels
   z = scaleFun(z)
   
-  out = fields::quilt.plot(x[,1], x[,2], z, 
-                           zlim=scaleFun(zlim), col=col, 
-                           add.legend=FALSE, ...)
+  out = do.call(fields::quilt.plot, list(x[,1], x[,2], z, 
+                                         zlim=scaleFun(zlim), col=col, 
+                                         add.legend=FALSE, dotList))
   
   fields::image.plot(zlim=scaleFun(zlim), nlevel=length(col), legend.only=TRUE, col=col, 
                      axis.args=c(list(at=ticks, labels=tickLabels), 

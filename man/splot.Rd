@@ -29,6 +29,7 @@ splot(
   legendArgs = list(),
   leaveRoomForLegend = TRUE,
   forceColorsInRange = FALSE,
+  pch = 19,
   colorName = c("col", "bg"),
   ...
 )
@@ -84,6 +85,8 @@ faster.}
 range. Useful if you have a value outside of the range or that is NA after
 being transformed via the scale that you still want to plot at the edge of
 the color scale}
+
+\item{pch}{see \code{\link{graphics::points}}}
 
 \item{colorName}{What plotting parameter controls the color of the points.}
 
