@@ -350,6 +350,7 @@ purpleYellowSeqCols = function(n, rev=FALSE, ggplot=FALSE) {
 }
 
 #' @rdname colorScales
+#' @export
 #' @importFrom colorspace diverging_hcl
 #' @importFrom colorspace scale_colour_continuous_diverging
 redBlueDivCols = function(n, valRange=NULL, center=NULL, rev=FALSE, ggplot=FALSE) {
@@ -386,6 +387,7 @@ redBlueDivCols = function(n, valRange=NULL, center=NULL, rev=FALSE, ggplot=FALSE
 }
 
 #' @rdname colorScales
+#' @export
 #' @importFrom colorspace diverging_hcl
 #' @importFrom colorspace scale_colour_continuous_diverging
 redGrayBlueDivCols = function(n, valRange=NULL, center=NULL, rev=FALSE, ggplot=FALSE) {
@@ -418,6 +420,7 @@ redGrayBlueDivCols = function(n, valRange=NULL, center=NULL, rev=FALSE, ggplot=F
 }
 
 #' @rdname colorScales
+#' @export
 #' @importFrom colorspace sequential_hcl
 #' @importFrom colorspace scale_colour_continuous_sequential
 blueSeqCols = function(n, ggplot=FALSE) {
@@ -428,6 +431,7 @@ blueSeqCols = function(n, ggplot=FALSE) {
 }
 
 #' @rdname colorScales
+#' @export
 #' @importFrom colorspace sequential_hcl
 #' @importFrom colorspace scale_colour_continuous_sequential
 greenSeqCols = function(n, ggplot=FALSE, rev=FALSE) {
@@ -439,6 +443,7 @@ greenSeqCols = function(n, ggplot=FALSE, rev=FALSE) {
 
 # based on viridis
 #' @rdname colorScales
+#' @export
 #' @importFrom colorspace sequential_hcl
 #' @importFrom colorspace scale_colour_continuous_sequential
 blueGreenYellowSeqCols = function(n, ggplot=FALSE, rev=FALSE) {
@@ -449,6 +454,7 @@ blueGreenYellowSeqCols = function(n, ggplot=FALSE, rev=FALSE) {
 }
 
 #' @rdname colorScales
+#' @export
 #' @importFrom colorspace divergingx_hcl
 #' @importFrom colorspace scale_colour_continuous_sequential
 redYellowBlueCols = function(n, ggplot=FALSE) {
