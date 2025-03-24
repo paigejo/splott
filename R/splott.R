@@ -22,8 +22,8 @@
 #' @param compressed Rather than cutting off a color scale to make the center at
 #' the desired point, compress the scale on the shorter side so it changes color
 #' faster.
-#' @param legend.mar (as legend.args) see \code{\link{fields::image.plot}}
-#' @param legend.width (as legend.args) see \code{\link{fields::image.plot}}
+#' @param legend.mar (as legend.args) see \code{\link{fields::imagePlot}}
+#' @param legend.width (as legend.args) see \code{\link{fields::imagePlot}}
 #' @param legendArgs Other arguments to legend.args. See 
 #' @param new Whether to make a new plot or add to the current one
 #' @param n.ticks Approximate number of ticks in color scale. See 
@@ -40,15 +40,16 @@
 #' the color scale
 #' @param pch see \code{\link{graphics::points}}
 #' @param colorName What plotting parameter controls the color of the points. 
+#' @param resetGraphics Whether or not to call graphics::par()
 #' @param ... Arguments to the plot function. For example, if `pch==19`, set to 
 #' 'bg', but if `pch==1`, set to 'col'.
 #' \code{\link{graphics::plot.default}}
 #' @details
-#' A wrapper around fields::image.plot for easy plotting of points with color 
+#' A wrapper around fields::imagePlot for easy plotting of points with color 
 #' and easy use of nonlinear color scales in base R.
 #' 
 #' @author John Paige
-#' @seealso \code{\link{fields::image.plot}}, 
+#' @seealso \code{\link{fields::imagePlot}}, 
 #' \code{\link{graphics::plot.default}}
 #' @examples 
 #' set.seed(123)
@@ -56,7 +57,7 @@
 #' z = rnorm(50)
 #' splot(x, z, colScale=redBlueDivCols, centerScale=TRUE)
 #' @export
-#' @importFrom fields image.plot
+#' @importFrom fields imagePlot
 #' @importFrom graphics plot.default
 #' @importFrom graphics points.default
 #' @importFrom graphics par
@@ -66,7 +67,7 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
                  legend.mar=7, new=TRUE, scaleFun=I, 
                  n.ticks=5, min.n=5, ticks=NULL, tickLabels=NULL, legend.width=1.2, addColorBar=TRUE, 
                  legendArgs=list(), leaveRoomForLegend=TRUE, forceColorsInRange=FALSE, 
-                 pch=19, colorName=c("col", "bg"), ...) {
+                 pch=19, colorName=c("col", "bg"), resetGraphics=TRUE, ...) {
   colorName = match.arg(colorName)
   
   # remove NA points
@@ -105,7 +106,7 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
     newMar = newPar$mar
     newMar[4] = max(newMar[4], legend.mar)
     newPar$mar = newMar
-    if(currPar$mar[4] != newMar[4])
+    if((currPar$mar[4] != newMar[4]) && resetGraphics)
       suppressWarnings({graphics::par(newPar)})
     
     if(colorName == "col") {
@@ -140,7 +141,7 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
       tickLabels = tickLabels[is.finite(ticks)]
     ticks = ticks[is.finite(ticks)]
     
-    # set list of arguments to image.plot
+    # set list of arguments to imagePlot
     
     legendArgs$zlim=scaleFun(zlim)
     legendArgs$nlevel=length(col)
@@ -161,7 +162,7 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
     legendArgs$legend.mar=legend.mar
     legendArgs$legend.width=legend.width
     
-    do.call("image.plot", legendArgs)
+    do.call("imagePlot", legendArgs)
     
   }
   invisible(NULL)
@@ -203,15 +204,15 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
 #' \code{\link{pretty}}
 #' @param ticks Unscaled colorscale tick marks
 #' @param tickLabels labels for ticks
-#' @param otherAxis.args Arguments to pass to `fields::image.plot` via 
+#' @param otherAxis.args Arguments to pass to `fields::imagePlot` via 
 #' `axis.args` (aside from `at` and `labels`)
-#' @param ... Arguments to the `fields::image.plot` and `fields::quilt.plot` 
+#' @param ... Arguments to the `fields::imagePlot` and `fields::quilt.plot` 
 #' functions.
 #' @details
 #' A wrapper around fields::quilt.plot for easy nonlinear color scales.
 #' @returns Output from \code{\link{fields::quilt.plot}}
 #' @author John Paige
-#' @seealso \code{\link{fields::image.plot}}, \code{\link{fields::quilt.plot}}, 
+#' @seealso \code{\link{fields::imagePlot}}, \code{\link{fields::quilt.plot}}, 
 #' \code{\link{colorScales}}
 #' @examples 
 #' set.seed(123)
@@ -219,7 +220,7 @@ splot = function(x, y, z, zlim=NULL, col=NULL, nlevel=64,
 #' z = rnorm(50)
 #' splot(x, z, colScale=redBlueDivCols, centerScale=TRUE)
 #' @export
-#' @importFrom fields image.plot
+#' @importFrom fields imagePlot
 #' @importFrom fields quilt.plot
 squilt = function(x, y, z=NULL, zlim=NULL, col=NULL, 
                   colScale=blueGreenYellowSeqCols, 
@@ -296,10 +297,10 @@ squilt = function(x, y, z=NULL, zlim=NULL, col=NULL,
                                            zlim=scaleFun(zlim), col=col, 
                                            add.legend=FALSE), dotList))
   
-  fields::image.plot(zlim=scaleFun(zlim), nlevel=length(col), legend.only=TRUE, col=col, 
-                     axis.args=c(list(at=ticks, labels=tickLabels), 
-                                 otherAxis.args),
-                     ...)
+  fields::imagePlot(zlim=scaleFun(zlim), nlevel=length(col), legend.only=TRUE, col=col, 
+                    axis.args=c(list(at=ticks, labels=tickLabels), 
+                                otherAxis.args),
+                    ...)
   
   invisible(out)
 }

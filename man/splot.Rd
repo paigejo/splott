@@ -29,6 +29,7 @@ splot(
   forceColorsInRange = FALSE,
   pch = 19,
   colorName = c("col", "bg"),
+  resetGraphics = TRUE,
   ...
 )
 }
@@ -59,7 +60,7 @@ diverging color scales)}
 the desired point, compress the scale on the shorter side so it changes color
 faster.}
 
-\item{legend.mar}{(as legend.args) see \code{\link{fields::image.plot}}}
+\item{legend.mar}{(as legend.args) see \code{\link{fields::imagePlot}}}
 
 \item{new}{Whether to make a new plot or add to the current one}
 
@@ -71,7 +72,7 @@ faster.}
 \item{min.n}{Minimum number of ticks in color scale. See
 \code{\link{pretty}}}
 
-\item{legend.width}{(as legend.args) see \code{\link{fields::image.plot}}}
+\item{legend.width}{(as legend.args) see \code{\link{fields::imagePlot}}}
 
 \item{addColorBar}{Whether to add the color bar/legend}
 
@@ -88,6 +89,8 @@ the color scale}
 
 \item{colorName}{What plotting parameter controls the color of the points.}
 
+\item{resetGraphics}{Whether or not to call graphics::par()}
+
 \item{...}{Arguments to the plot function. For example, if \code{pch==19}, set to
 'bg', but if \code{pch==1}, set to 'col'.
 \code{\link{graphics::plot.default}}}
@@ -98,7 +101,7 @@ the color scale}
 Column major ordering, row and col start at index 1
 }
 \details{
-A wrapper around fields::image.plot for easy plotting of points with color
+A wrapper around fields::imagePlot for easy plotting of points with color
 and easy use of nonlinear color scales in base R.
 }
 \examples{
@@ -108,7 +111,7 @@ z = rnorm(50)
 splot(x, z, colScale=redBlueDivCols, centerScale=TRUE)
 }
 \seealso{
-\code{\link{fields::image.plot}},
+\code{\link{fields::imagePlot}},
 \code{\link{graphics::plot.default}}
 }
 \author{

@@ -74,10 +74,10 @@ range. Useful if you have a value outside of the range or that is NA after
 being transformed via the scale that you still want to plot at the edge of
 the color scale}
 
-\item{otherAxis.args}{Arguments to pass to \code{fields::image.plot} via
+\item{otherAxis.args}{Arguments to pass to \code{fields::imagePlot} via
 \code{axis.args} (aside from \code{at} and \code{labels})}
 
-\item{...}{Arguments to the \code{fields::image.plot} and \code{fields::quilt.plot}
+\item{...}{Arguments to the \code{fields::imagePlot} and \code{fields::quilt.plot}
 functions.}
 
 \item{new}{Whether to make a new plot or add to the current one}
@@ -99,7 +99,7 @@ z = rnorm(50)
 splot(x, z, colScale=redBlueDivCols, centerScale=TRUE)
 }
 \seealso{
-\code{\link{fields::image.plot}}, \code{\link{fields::quilt.plot}},
+\code{\link{fields::imagePlot}}, \code{\link{fields::quilt.plot}},
 \code{\link{colorScales}}
 }
 \author{
