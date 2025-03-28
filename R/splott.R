@@ -423,9 +423,9 @@ redGrayBlueDivCols = function(n, valRange=NULL, center=NULL, rev=FALSE, ggplot=F
 #' @export
 #' @importFrom colorspace sequential_hcl
 #' @importFrom colorspace scale_colour_continuous_sequential
-blueSeqCols = function(n, ggplot=FALSE) {
+blueSeqCols = function(n, ggplot=FALSE, rev=FALSE) {
   if(!ggplot)
-    colorspace::sequential_hcl(n, h1=245, c1=50, cmax=75, l1=20, l2=98, p1=0.8, rev=TRUE)
+    colorspace::sequential_hcl(n, h1=245, c1=50, cmax=75, l1=20, l2=98, p1=0.8, rev=!rev)
   else
     colorspace::scale_colour_continuous_sequential(h1=245, c1=50, cmax=75, l1=20, l2=98, p1=0.8, rev=TRUE, n_interp=n)
 }
@@ -436,7 +436,7 @@ blueSeqCols = function(n, ggplot=FALSE) {
 #' @importFrom colorspace scale_colour_continuous_sequential
 greenSeqCols = function(n, ggplot=FALSE, rev=FALSE) {
   if(!ggplot)
-    colorspace::sequential_hcl(n, h1=128, c1=100, l1=72, l2=95, p1=1.0, rev=rev)
+    colorspace::sequential_hcl(n, h1=128, c1=100, l1=72, l2=95, p1=1.0, rev=!rev)
   else
     colorspace::scale_colour_continuous_sequential(h1=128, c1=100, l1=72, l2=95, p1=1.0, rev=rev, n_interp=n)
 }

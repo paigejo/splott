@@ -23,7 +23,7 @@ redGrayBlueDivCols(
   ggplot = FALSE
 )
 
-blueSeqCols(n, ggplot = FALSE)
+blueSeqCols(n, ggplot = FALSE, rev = FALSE)
 
 greenSeqCols(n, ggplot = FALSE, rev = FALSE)
 
